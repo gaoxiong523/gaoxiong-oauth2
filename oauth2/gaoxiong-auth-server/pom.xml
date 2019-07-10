@@ -8,10 +8,10 @@
         <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.gaoxiong</groupId>
-    <artifactId>gaoxiong-auth-server</artifactId>
+    <groupId>com.com.gaoxiong</groupId>
+    <artifactId>com.gaoxiong-auth-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gaoxiong-auth-server</name>
+    <name>com.gaoxiong-auth-server</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

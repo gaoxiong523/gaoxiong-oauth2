@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
- * @author gaoxiong
+ * @author com.gaoxiong
  * @ClassName UserService
  * @Description TODO
  * @date 2019/7/10 11:58

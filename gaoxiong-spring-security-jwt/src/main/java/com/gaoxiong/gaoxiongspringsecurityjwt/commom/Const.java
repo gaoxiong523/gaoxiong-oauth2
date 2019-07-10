@@ -1,7 +1,7 @@
 package com.gaoxiong.gaoxiongspringsecurityjwt.commom;
 
 /**
- * @author gaoxiong
+ * @author com.gaoxiong
  * @ClassName Const
  * @Description TODO
  * @date 2019/7/10 10:54

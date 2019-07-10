@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import javax.sql.DataSource;
 
 /**
- * @author gaoxiong
+ * @author com.gaoxiong
  * @ClassName AuthorizationServerConfig
  * @Description TODO
  * @date 2019/7/9 14:11

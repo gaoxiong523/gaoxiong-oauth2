@@ -2,18 +2,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>com.gaoxiong-server</module>
+        <module>com.gaoxiong-client-1</module>
+        <module>com.gaoxiong-client-2</module>
+    </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.gaoxiong</groupId>
-    <artifactId>gaoxiong-spring-security-oauth2-jwt</artifactId>
+    <groupId>com.com.gaoxiong</groupId>
+    <artifactId>com.gaoxiong-spring-security-oauth2-jwt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gaoxiong-spring-security-oauth2-jwt</name>
+    <name>com.gaoxiong-spring-security-oauth2-jwt</name>
     <description>Demo project for Spring Boot</description>
-
+    <packaging>pom</packaging>
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>

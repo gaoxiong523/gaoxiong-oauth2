@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * @author gaoxiong
+ * @author com.gaoxiong
  * @ClassName AuthServiceImpl
  * @Description TODO
  * @date 2019/7/10 11:20

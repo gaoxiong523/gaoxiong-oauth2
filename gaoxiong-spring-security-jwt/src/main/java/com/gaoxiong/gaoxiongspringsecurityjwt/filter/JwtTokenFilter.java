@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author gaoxiong
+ * @author com.gaoxiong
  * @ClassName JwtTokenFilter
  * @Description token 过滤器, 用于每次外部对 接口请求时的token处理
  * @date 2019/7/10 10:55

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 /**
- * @author gaoxiong
+ * @author com.gaoxiong
  * @ClassName PermissionsController
  * @Description TODO
  * @date 2019/7/10 11:50

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author gaoxiong
+ * @author com.gaoxiong
  * @ClassName JwtTokenUtil
  * @Description TODO
  * @date 2019/7/10 10:43

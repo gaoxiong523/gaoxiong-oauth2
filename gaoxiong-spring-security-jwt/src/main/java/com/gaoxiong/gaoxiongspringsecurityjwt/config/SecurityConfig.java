@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * @author gaoxiong
+ * @author com.gaoxiong
  * @ClassName SecurityConfi
  * @Description TODO
  * @date 2019/7/10 11:18
