@@ -1,0 +1,11 @@
+server:
+  port: 7777
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/gaoxiong-spring-security-jwt?serverTimezone=GMT
+    username: root
+    password: 123456
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
