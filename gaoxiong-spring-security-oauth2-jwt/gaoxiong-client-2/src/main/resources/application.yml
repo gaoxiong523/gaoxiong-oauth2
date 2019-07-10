@@ -1,0 +1,16 @@
+auth-server: http://localhost:8085/uac
+server:
+  port: 8087
+security:
+  oauth2:
+    client:
+      client-id: sheep2
+      client-secret: 123456
+      user-authorization-uri: ${auth-server}/oauth/authorize
+      access-token-uri: ${auth-server}/oauth/token
+      registered-redirect-uri:
+        - http://localhost:8087/permissions/normal
+        - http://localhost:8087/login
+    resource:
+      jwt:
+        key-value: ${auth-server}/oauth/token_key

@@ -11,5 +11,9 @@
 
     <artifactId>gaoxiong-client-2</artifactId>
 
+    <dependencies>
+
+
+    </dependencies>
 
 </project>

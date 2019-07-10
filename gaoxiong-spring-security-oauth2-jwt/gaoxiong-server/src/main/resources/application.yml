@@ -1,4 +1,4 @@
 server:
-  port: 8885
+  port: 8085
   servlet:
     context-path: /uac

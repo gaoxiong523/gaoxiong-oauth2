@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure ( HttpSecurity http ) throws Exception {
         http.requestMatchers()
-                .antMatchers("oauth/**","/login/**","logout/**")
+                .antMatchers("/oauth/**","/login/**","/logout/**")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/oauth/**")
