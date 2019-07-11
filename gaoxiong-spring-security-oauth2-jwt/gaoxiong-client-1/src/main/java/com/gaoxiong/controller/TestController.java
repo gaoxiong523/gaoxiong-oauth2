@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019/7/10 0010 下午 8:52
  */
 @RestController
-@RequestMapping("/permissions")
 public class TestController {
 
     @GetMapping("/normal")

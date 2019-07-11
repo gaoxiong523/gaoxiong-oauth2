@@ -25,7 +25,8 @@ public class GaoxiongUserDetailService implements UserDetailsService {
         if (!username.equals("gaoxiong")) {
             throw new UsernameNotFoundException("用户不存在");
         }
-        return new User("gaoxiong", passwordEncoder.encode("123456"), AuthorityUtils.createAuthorityList("ROLE_NORMAL", "ROLE_MEDIUM"));
+        User user = new User("gaoxiong", passwordEncoder.encode("123456"), AuthorityUtils.createAuthorityList("ROLE_NORMAL", "ROLE_MEDIUM"));
+        return user;
     }
 
 }

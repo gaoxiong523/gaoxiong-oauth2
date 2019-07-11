@@ -13,4 +13,7 @@ security:
         - http://localhost:8087/login
     resource:
       jwt:
-        key-value: ${auth-server}/oauth/token_key
+        key-uri: ${auth-server}/oauth/token_key
+#logging:
+#  level:
+#    root: debug

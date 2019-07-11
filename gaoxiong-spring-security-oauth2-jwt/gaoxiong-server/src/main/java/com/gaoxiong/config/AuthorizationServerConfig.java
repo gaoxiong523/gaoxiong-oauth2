@@ -10,6 +10,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -29,7 +31,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory() //配置两个内存管理的客户端应用
                 .withClient("sheep1")
                 .secret(new BCryptPasswordEncoder().encode("123456"))
-                .redirectUris("www.baidu.com","http://localhost:8086/login","http://localhost:8086/permissions/normal","http://localhost:8086/permissions/medium","http://localhost:8086/permissions/admin")
+                .redirectUris("http://localhost:8086/login")
                 .authorizedGrantTypes("authorization_code", "refresh_token")
                 .scopes("all")
                 .autoApprove(false)
@@ -53,6 +55,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return converter;
     }
 
+
+
     /**
      * 声明 为jwt token存储
      * @return
@@ -60,12 +64,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Bean
     public JwtTokenStore jwtTokenStore(){
         return new JwtTokenStore(jwtAccessTokenConverter());
+//        return new MyJwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    @Bean
+    public TokenStore tokenStore(){
+        return new InMemoryTokenStore();
     }
 
     @Override
     public void configure ( AuthorizationServerEndpointsConfigurer endpoints ) throws Exception {
         endpoints.tokenStore(jwtTokenStore())
                 .accessTokenConverter(jwtAccessTokenConverter());
+//        endpoints.tokenStore(tokenStore());
         DefaultTokenServices tokenServices = (DefaultTokenServices) endpoints.getDefaultAuthorizationServerTokenServices();
 //        DefaultTokenServices tokenServices = new DefaultTokenServices();
 //        AuthorizationServerTokenServices tokenServices = endpoints.getTokenServices();

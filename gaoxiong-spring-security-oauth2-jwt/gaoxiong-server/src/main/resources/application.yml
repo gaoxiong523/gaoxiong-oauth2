@@ -2,3 +2,6 @@ server:
   port: 8085
   servlet:
     context-path: /uac
+#logging:
+#  level:
+#    root: debug

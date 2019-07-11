@@ -1,3 +1,4 @@
+
 auth-server: http://localhost:8085/uac
 server:
   port: 8086
@@ -8,7 +9,9 @@ security:
       client-secret: 123456
       user-authorization-uri: ${auth-server}/oauth/authorize
       access-token-uri: ${auth-server}/oauth/token
-      registered-redirect-uri: ${auth-server}/login
     resource:
       jwt:
-        key-value: ${auth-server}/oauth/token_key
+        key-uri: ${auth-server}/oauth/token_key
+#logging:
+#  level:
+#    root: debug
