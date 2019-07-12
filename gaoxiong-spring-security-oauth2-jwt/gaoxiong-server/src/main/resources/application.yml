@@ -2,6 +2,17 @@ server:
   port: 8085
   servlet:
     context-path: /uac
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: gaoxiong-server
 #logging:
 #  level:
 #    root: debug

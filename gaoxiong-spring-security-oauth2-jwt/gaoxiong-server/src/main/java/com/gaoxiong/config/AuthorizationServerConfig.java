@@ -1,7 +1,15 @@
 package com.gaoxiong.config;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -14,6 +22,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStoreSerializationStrategy;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +42,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .withClient("sheep1")
                 .secret(new BCryptPasswordEncoder().encode("123456"))
                 .redirectUris("http://localhost:8086/login")
+                .authorizedGrantTypes("authorization_code", "refresh_token")
+                .scopes("all")
+                .autoApprove(false)
+                .and()
+                .withClient("gaoxiong-zuul")
+                .secret(new BCryptPasswordEncoder().encode("123456"))
+                .redirectUris("http://localhost:8000/login")
                 .authorizedGrantTypes("authorization_code", "refresh_token")
                 .scopes("all")
                 .autoApprove(false)
@@ -66,7 +83,35 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return new JwtTokenStore(jwtAccessTokenConverter());
 //        return new MyJwtTokenStore(jwtAccessTokenConverter());
     }
+    @Bean
+    public RedisConnectionFactory redisConnectionFactory(){
+        return new LettuceConnectionFactory("106.12.84.126", 6379);
+    }
 
+    @Bean
+    public Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer(){
+        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+        return jackson2JsonRedisSerializer;
+    }
+
+
+    @Bean
+    public RedisTokenStoreSerializationStrategy redisTokenStoreSerializationStrategy(){
+        return new JacksonSerializationStrategy();
+    }
+
+
+    @Bean
+    public RedisTokenStore redisTokenStore(){
+        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory());
+        //设置序列化策略 ,
+        redisTokenStore.setSerializationStrategy(redisTokenStoreSerializationStrategy());
+        return redisTokenStore;
+    }
     @Bean
     public TokenStore tokenStore(){
         return new InMemoryTokenStore();
@@ -74,7 +119,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure ( AuthorizationServerEndpointsConfigurer endpoints ) throws Exception {
-        endpoints.tokenStore(jwtTokenStore())
+        endpoints.tokenStore(redisTokenStore())
                 .accessTokenConverter(jwtAccessTokenConverter());
 //        endpoints.tokenStore(tokenStore());
         DefaultTokenServices tokenServices = (DefaultTokenServices) endpoints.getDefaultAuthorizationServerTokenServices();

@@ -1,0 +1,29 @@
+
+server:
+  port: 8000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: gaoxiong-zuul
+security:
+  oauth2:
+    client:
+      client-id: gaoxing-zuul
+      client-secret: 123456
+      user-authorization-uri: http://localhost:8000/uac/oauth/authorize
+      access-token-uri: http://localhost:8000/uac/oauth/token
+    resource:
+      jwt:
+        key-uri: http://localhost:8000/uac/oauth/token_key
+zuul:
+  routes:
+    path: /uac/**
+    serviceId: gaoxiong-server
+    sensitiveHeader:

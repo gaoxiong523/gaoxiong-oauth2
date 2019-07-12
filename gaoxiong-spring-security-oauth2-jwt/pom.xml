@@ -7,6 +7,8 @@
         <module>gaoxiong-client-1</module>
         <module>gaoxiong-client-2</module>
         <module>micro-service</module>
+        <module>eureka-server</module>
+        <module>zuul-server</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
