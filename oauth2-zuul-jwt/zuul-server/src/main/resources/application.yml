@@ -1,0 +1,29 @@
+server:
+  port: 5555
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: zuul-server
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true
+  routes:
+    client-a: /client/**
+    serviceId: client-a
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:7777/uaa/oauth/token  #颁发令牌的端点
+      user-authorization-uri: http://localhost:7777/uaa/oauth/authorize  # 认证 端点
+      client-id: gaoxiong-zuul
+      client-secret: 123456
+    resource:
+      jwt:
+#        key-uri: http://localhost:7777/uaa/oauth/token_key   # 获取token 的key 值地址
+        key-value: testKey
