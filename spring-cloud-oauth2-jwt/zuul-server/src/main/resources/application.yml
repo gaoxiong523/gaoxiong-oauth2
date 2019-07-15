@@ -1,0 +1,31 @@
+server:
+  port: 10086
+spring:
+  application:
+    name: zuul-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10088/eureka/
+  instance:
+    prefer-ip-address: true
+zuul:
+  sensitive-headers:
+  ribbon:
+    eager-load:
+      enabled: true
+  routes:
+    order-server:
+      path: /order/**
+      serviceId: order-server
+  strip-prefix: true
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:10089/uaa/oauth/token
+      user-authorization-uri: http://localhost:10089/uaa/oauth/authorize
+      client-id: zuul-server
+      client-secret: zuul-server
+    resource:
+      jwt:
+        key-value: testKey

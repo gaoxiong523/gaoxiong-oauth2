@@ -1,0 +1,30 @@
+server:
+  port: 10089
+  servlet:
+    context-path: /uaa
+spring:
+  redis:
+    host: 106.12.84.16
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/oauth2?serverTimezone=GMT
+    password: 123456
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect  # 解决 错误  org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+  application:
+    name: auth-server
+eureka:
+  instance:
+    hostname: auth-server
+#    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      #defaultZone: http://register2:9011/eureka/,http://register2:9012/eureka/
+      defaultZone: http://localhost:10088/eureka/

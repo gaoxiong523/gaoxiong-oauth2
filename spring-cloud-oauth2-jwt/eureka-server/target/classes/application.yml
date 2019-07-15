@@ -1,0 +1,10 @@
+server:
+  port: 10088
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defatultZone: http://localhost:10088/eureka/
+    register-with-eureka: false
+    fetch-registry: false

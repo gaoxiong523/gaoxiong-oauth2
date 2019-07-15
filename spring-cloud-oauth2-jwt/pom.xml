@@ -2,47 +2,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
     <modules>
-        <module>gaoxiong-server</module>
-        <module>gaoxiong-client-1</module>
-        <module>gaoxiong-client-2</module>
-        <module>eureka-server</module>
         <module>zuul-server</module>
+        <module>eureka-server</module>
+        <module>auth-server</module>
+        <module>order-server</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.4.RELEASE</version>
+        <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.gaoxiong</groupId>
-    <artifactId>gaoxiong-spring-security-oauth2-jwt</artifactId>
+    <artifactId>spring-cloud-oauth2-jwt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gaoxiong-spring-security-oauth2-jwt</name>
+    <name>spring-cloud-oauth2-jwt</name>
     <description>Demo project for Spring Boot</description>
-    <packaging>pom</packaging>
+
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-starter-security</artifactId>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

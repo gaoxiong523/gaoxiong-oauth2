@@ -2,22 +2,18 @@ package com.gaoxiong;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
  * @author gaoxiong
- * @ClassName ZuulServiceApp
+ * @ClassName ZuulApp
  * @Description TODO
- * @date 2019/7/12 11:12
+ * @date 2019/7/15 10:15
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableZuulProxy
-@EnableOAuth2Sso
-public class ZuulServiceApp {
+public class AuthApp {
     public static void main ( String[] args ) {
-        SpringApplication.run(ZuulServiceApp.class, args);
+        SpringApplication.run(AuthApp.class, args);
     }
 }
