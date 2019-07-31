@@ -20,3 +20,32 @@ spring security oauth2 中的 endpoint（聊聊spring security oauth2的几个en
 认证中心的授权页也可以自定义，甚至可以去掉
 
 包括一些异常提示也可以自定义
+
+```text
+通过feign调用, 添加 token 头信息
+
+@Configuration
+public class FeignOauth2RequestInterceptor implements RequestInterceptor {
+
+    private final String AUTHORIZATION_HEADER = "Authorization";
+    private final String BEARER_TOKEN_TYPE = "Bearer";
+
+    @Override
+    public void apply(RequestTemplate requestTemplate) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        if (authentication != null && authentication.getDetails() instanceof OAuth2AuthenticationDetails) {
+            OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) authentication.getDetails();
+            requestTemplate.header(AUTHORIZATION_HEADER, String.format("%s %s", BEARER_TOKEN_TYPE, details.getTokenValue()));
+        }
+
+    }
+}
+
+```
+
+micro-service-oauth2 可正确达到我们的目的.
+```java
+   endpoints.tokenEnhancer(jwtAccessTokenConverter()) //生成JWT类型的token
+
+```

@@ -1,0 +1,56 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: zuul-server
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/oauth2?serverTimezone=GMT
+      username: root
+      password: 123456
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+zuul:
+#  prefix: /api # 添加路由前缀
+  retryable: true
+  routes:
+    order-server: /order/**  #将商品微服务映射到/item/**
+    pay-server: /pay/** # 路由前缀 加上路径 ,**是目标服务的接口地址 eg /trade/hello, 拼接后是 /api/trade/trade/hello
+    auth-server: /auth/** #授权中心微服务
+  ignored-services:
+    - upload-service # 忽略upload-service服务
+  add-host-header: true  #携带请求本身的header头信息
+  sensitive-headers: null #配置禁止使用的头信息,这里设置为null,否则set-cookie无效
+ribbon:
+  ConnectTimeout: 250 # 连接超时时间(ms)
+  ReadTimeout: 2000 # 通信超时时间(ms)
+  OkToRetryOnAllOperations: true # 是否对所有操作重试
+  MaxAutoRetriesNextServer: 1 # 同一服务不同实例的重试次数
+  MaxAutoRetries: 1 # 同一实例的重试次数
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 10000 # 熔断超时时长：10000ms
+security:
+  oauth2:
+    client:
+      client-id: client_3
+      client-secret: 123456
+      access-token-uri: http://localhost:9005/uaa/oauth/token
+      user-authorization-uri: http://localhost:9005/uaa/oauth/authorize
+    resource:
+      token-info-uri: http://localhost:9005/uaa/oauth/check_token
+
+
+logging:
+  level:
+    org.springframework.security: debug

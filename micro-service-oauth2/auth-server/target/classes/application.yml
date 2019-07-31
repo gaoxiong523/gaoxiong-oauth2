@@ -1,0 +1,26 @@
+server:
+  port: 9005
+  servlet:
+    context-path: /uaa
+spring:
+  application:
+    name: auth-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oauth2?serverTimezone=GMT
+    username: root
+    password: 123456
+  redis:
+      host: 106.12.84.126
+logging:
+  level:
+      org.springframework: INFO #INFO
+      org.springframework.security: DEBUG
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}

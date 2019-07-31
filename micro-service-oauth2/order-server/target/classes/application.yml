@@ -1,0 +1,13 @@
+server:
+  port: 9003
+spring:
+  application:
+    name: order-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
