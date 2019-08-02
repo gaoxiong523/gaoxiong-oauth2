@@ -49,3 +49,20 @@ micro-service-oauth2 可正确达到我们的目的.
    endpoints.tokenEnhancer(jwtAccessTokenConverter()) //生成JWT类型的token
 
 ```
+##oauth2 优雅集成短信验证码登录以及第三方登录
+```text
+基于SpringCloud做微服务架构分布式系统时，OAuth2.0作为认证的业内标准，Spring Security OAuth2也提供了全套的解决方案来支持在Spring Cloud/Spring Boot环境下使用OAuth2.0，提供了开箱即用的组件。但是在开发过程中我们会发现由于Spring Security OAuth2的组件特别全面，这样就导致了扩展很不方便或者说是不太容易直指定扩展的方案，例如：
+•图片验证码登录
+•短信验证码登录
+•微信小程序登录
+•第三方系统登录
+•CAS单点登录
+
+，集成登录的思路如下：
+•在进入流程之前先进行拦截，设置集成认证的类型，例如：短信验证码、图片验证码等信息。
+•在拦截的通知进行预处理，预处理的场景有很多，比如验证短信验证码是否匹配、图片验证码是否匹配、是否是登录IP白名单等处理
+•在UserDetailService.loadUserByUsername方法中，根据之前设置的集成认证类型去获取用户信息，例如：通过手机号码获取用户、通过微信小程序OPENID获取用户等等
+
+接入这个流程之后，基本上就可以优雅集成第三方登录。
+
+```

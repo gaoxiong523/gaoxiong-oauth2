@@ -9,6 +9,8 @@
         <module>eureka-server</module>
         <module>order-server</module>
         <module>pay-server</module>
+        <module>taobao_login</module>
+        <module>auth-server-by-third</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
