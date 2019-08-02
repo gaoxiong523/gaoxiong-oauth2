@@ -51,6 +51,7 @@ micro-service-oauth2 可正确达到我们的目的.
 ```
 ##oauth2 优雅集成短信验证码登录以及第三方登录
 ```text
+link https://www.jb51.net/article/138531.htm
 基于SpringCloud做微服务架构分布式系统时，OAuth2.0作为认证的业内标准，Spring Security OAuth2也提供了全套的解决方案来支持在Spring Cloud/Spring Boot环境下使用OAuth2.0，提供了开箱即用的组件。但是在开发过程中我们会发现由于Spring Security OAuth2的组件特别全面，这样就导致了扩展很不方便或者说是不太容易直指定扩展的方案，例如：
 •图片验证码登录
 •短信验证码登录
@@ -64,5 +65,10 @@ micro-service-oauth2 可正确达到我们的目的.
 •在UserDetailService.loadUserByUsername方法中，根据之前设置的集成认证类型去获取用户信息，例如：通过手机号码获取用户、通过微信小程序OPENID获取用户等等
 
 接入这个流程之后，基本上就可以优雅集成第三方登录。
+
+在这个类种主要完成2部分工作：1、根据参数获取当前的是认证类型，2、根据不同的认证类型调用不同的IntegrationAuthenticator.prepar进行预处理
+```
+```text
+第二步,将拦截器放入到拦截链条中
 
 ```
